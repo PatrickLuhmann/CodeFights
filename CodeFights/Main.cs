@@ -21,6 +21,9 @@ namespace CodeFights
 			int[] subseq = new int[seq.Length];
 			Array.Copy(src, subseq, seq.Length);
 
+			// Use the difference of the first subseq as the starting point.
+			int diff = CalcSeqDiff(seq, subseq);
+
 			// If the two sequences are of the same length, then
 			// there is no need to search for a subsequence.
 			if (seq.Length != src.Length)
@@ -33,15 +36,17 @@ namespace CodeFights
 				for (int i = 0; i < seq.Length; i++)
 					seqpos[i] = i;
 
+				bool theend;
 				do
 				{
-					bool theend = GetNextSubSeq(src, seqpos, subseq);
-					System.Diagnostics.Debug.Write(seqpos.ToString());
-					System.Diagnostics.Debug.WriteLine("");
-				} while (false);
+					theend = GetNextSubSeq(src, seqpos, subseq);
+					int currDiff = CalcSeqDiff(seq, subseq);
+					if (currDiff < diff)
+						diff = currDiff;
+				} while (theend);
 			}
 
-			return CalcSeqDiff(seq, subseq);
+			return diff;
 		}
 
 		public static int CalcSeqDiff(int[] a, int[] b)
@@ -98,6 +103,26 @@ namespace CodeFights
 
 					// We are done
 					return true;
+				}
+			}
+		}
+
+		/// <summary>
+		/// Create a matrix that holds the differences between two sequences.
+		/// This might be helpful in finding the closest subsequence, since
+		/// each difference is only calculated once.
+		/// </summary>
+		/// <param name="a">The first sequence</param>
+		/// <param name="b">The second sequence.</param>
+		public static void CreateMatrix(int[] a, int[] b)
+		{
+			int[,] matrix = new int[a.Length, b.Length];
+
+			for (int i = 0; i < a.Length; i++)
+			{
+				for (int j = 0; j < b.Length; j++)
+				{
+					matrix[i,j] = Math.Abs(a[i] - b[j]);
 				}
 			}
 		}

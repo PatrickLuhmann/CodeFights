@@ -39,14 +39,72 @@ namespace CodeFights.Tests
 		}
 
 		[TestMethod()]
+		public void ClosestSequence2Test_1Of2()
+		{
+			int[] a = new int[] { 1 };
+			int[] b = new int[] { 2, 7 };
+
+			Assert.AreEqual(1, Program.ClosestSequence2(a, b));
+		}
+
+		[TestMethod()]
+		public void ClosestSequence2Test_10Of20()
+		{
+			int[] a = new int[10];
+			int[] b = new int[20];
+
+			for (int i = 0; i < a.Length; i++)
+				a[i] = i;
+			for (int i = 0; i < b.Length; i++)
+				b[i] = 1000 - i;
+
+			// TODO: I do not know the expecte value for this test.
+			Assert.AreEqual(1, Program.ClosestSequence2(a, b));
+		}
+
+		[TestMethod()]
 		public void ClosestSequence2Test_One()
 		{
 			int[] a = new int[] { 1, 2, 6 };
 			int[] b = new int[] { 0, 1, 3, 4, 5 };
 
 			Assert.AreEqual(2, Program.ClosestSequence2(a, b));
+		}
 
-			//Assert.Fail();
+		[TestMethod()]
+		public void ClosestSequence2Test_Two()
+		{
+			int[] a = new int[] { 1, 2, 1, 2, 1, 2 };
+			int[] b = new int[] { 3, 0, 0, 3, 0, 3, 3, 0, 0 };
+
+			Assert.AreEqual(7, Program.ClosestSequence2(a, b));
+		}
+
+		[TestMethod()]
+		public void ClosestSequence2Test_Three()
+		{
+			int[] a = new int[] { 1, 1, 1, 1, 1, 1 };
+			int[] b = new int[] { 1, 1, 1, 1, 1, 1, 1, 1, 1 };
+
+			Assert.AreEqual(0, Program.ClosestSequence2(a, b));
+		}
+
+		[TestMethod()]
+		public void ClosestSequence2Test_Four()
+		{
+			int[] a = new int[] { 13, 5, 3, -1, -9, 20, 5, -17, 20, -11, -6, 1, 17, 18, 20, -6, 11, 12, 3, -8 };
+			int[] b = new int[] { 1, 1, -18, -3, -9, 16, 5, 13, -2, 4, -9, -16, -20, 13, -3, 10, 20, -5, -20, 2 };
+
+			Assert.AreEqual(270, Program.ClosestSequence2(a, b));
+		}
+
+		[TestMethod()]
+		public void ClosestSequence2Test_Five()
+		{
+			int[] a = new int[] { -26, -35, 44, 23, 7, -40, -14, 18, 39, -12, -22, -5, 4, 10, 0, -11, 45, -16, 2, 46, -45, 2, -3, -50, -17, 49, 47, -15, 49, -15, 16, 43, 33, 22, -34, 48, -41, 12, 19, -17, 31, -46, 38, -21, 16, 3, -43, -50, 4, 7 };
+			int[] b = new int[] { 18, 16, -22, 4, -5, -46, -43, 28, 50, -47, 31, -41, 35, -6, -20, -33, 10, 34, -7, -46, 0, 35, 29, 22, 19, -48, -4, 10, -41, 26, -33, 45, -2, 24, 4, 39, -2, -42, 41, 18, -28, 28, -44, 19, 34, 41, 33, -27, -26, 41 };
+
+			Assert.AreEqual(1928, Program.ClosestSequence2(a, b));
 		}
 
 		[TestMethod()]
@@ -407,6 +465,39 @@ namespace CodeFights.Tests
 			exp = 2000 + 2000 + 2000;
 			act = Program.CalcSeqDiff(a, b);
 			Assert.AreEqual(exp, act);
+		}
+
+		[TestMethod()]
+		public void CreateMatrixTest_5x5()
+		{
+			int[] x = new int[5];
+			int[] y = new int[5];
+
+			Program.CreateMatrix(x, y);
+
+			Assert.IsTrue(true);
+		}
+
+		[TestMethod()]
+		public void CreateMatrixTest_50x50()
+		{
+			int[] x = new int[50];
+			int[] y = new int[50];
+
+			Program.CreateMatrix(x, y);
+
+			Assert.IsTrue(true);
+		}
+
+		[TestMethod()]
+		public void CreateMatrixTest_1000x1000()
+		{
+			int[] x = new int[1000];
+			int[] y = new int[1000];
+
+			Program.CreateMatrix(x, y);
+
+			Assert.IsTrue(true);
 		}
 	}
 }
